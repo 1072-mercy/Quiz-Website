@@ -100,7 +100,6 @@
     <input type="text" id="studentName" placeholder="Full Name">
 
     <form id="quizForm">
-
       <!-- Question 1 -->
       <div class="question">1. Which device in the coding box lights up when you use the LED block?</div>
       <div class="options">
@@ -242,9 +241,14 @@
     <div class="result" id="result"></div>
   </div>
 
-  <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzIx27iOI4TNdEpYDOS5r_at_65wQwAa5I9maaiUPpF1yus_Nsif9Yyw6z5SVe0Jo7K/exec"; // <-- Replace with your Web App URL
+  <!-- Hidden form for Google Apps Script submission -->
+  <form id="hiddenForm" action="https://script.google.com/macros/s/AKfycbzIx27iOI4TNdEpYDOS5r_at_65wQwAa5I9maaiUPpF1yus_Nsif9Yyw6z5SVe0Jo7K/exec" method="post" target="hidden_iframe">
+    <input type="hidden" name="name" id="hiddenName">
+    <input type="hidden" name="score" id="hiddenScore">
+  </form>
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
+  <script>
     function calculateScore() {
       let score = 0;
       for (let i = 1; i <= 15; i++) {
@@ -252,7 +256,7 @@
         if (q) score += parseInt(q.value);
       }
 
-      const studentName = document.getElementById('studentName').value || "Anonymous";
+      const name = document.getElementById('studentName').value || "Anonymous";
       const resultDiv = document.getElementById('result');
 
       let message = `🎉 Your Score is: ${score}/15 🎉\n`;
@@ -277,14 +281,10 @@
 
       resultDiv.textContent = message;
 
-      fetch(WEB_APP_URL, {
-        method: "POST",
-        body: JSON.stringify({name: studentName, score: score}),
-        headers: {"Content-Type": "application/json"}
-      })
-      .then(response => response.json())
-      .then(data => console.log("Data saved:", data))
-      .catch(err => console.error("Error sending data:", err));
+      // Submit via hidden form to avoid CORS
+      document.getElementById('hiddenName').value = name;
+      document.getElementById('hiddenScore').value = score;
+      document.getElementById('hiddenForm').submit();
     }
   </script>
 </body>
