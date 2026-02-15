@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kidsbits Coding Box Quiz</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #a0eaff, #fef0ff);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 720px;
+      margin: 30px auto;
+      background: #fff7f3;
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      border: 3px solid #ff99cc;
+    }
+    h1 {
+      text-align: center;
+      color: #ff3399;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .options label {
+      display: block;
+      padding: 8px 12px;
+      border: 2px solid #ff66cc;
+      border-radius: 10px;
+      margin: 6px 0;
+      cursor: pointer;
+      transition: 0.2s;
+      background-color: #ffe6f0;
+    }
+    .options input {
+      margin-right: 10px;
+    }
+    .options label:hover {
+      background-color: #ffd6eb;
+    }
+    button {
+      display: block;
+      width: 100%;
+      background-color: #ff3399;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #cc297a;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      color: #33cc33;
+      position: relative;
+      white-space: pre-line;
+    }
+    .flower {
+      position: absolute;
+      font-size: 24px;
+      animation: popUp 1.5s ease-out forwards;
+    }
+    @keyframes popUp {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; }
+      50% { transform: translateY(-100px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1); opacity: 0; }
+    }
+    #studentName {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ff66cc;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Kidsbits Coding Box Quiz</h1>
+
+    <div class="question">Enter your full name:</div>
+    <input type="text" id="studentName" placeholder="Full Name">
+
+    <form id="quizForm">
+
+      <!-- Question 1 -->
+      <div class="question">1. Which device in the coding box lights up when you use the LED block?</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="1">LED</label>
+        <label><input type="radio" name="q1" value="0">Motor</label>
+        <label><input type="radio" name="q1" value="0">Fan</label>
+        <label><input type="radio" name="q1" value="0">Buzzer</label>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">2. Which block is used to turn on an LED for a certain time?</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="1">LED ON → Wait → LED OFF</label>
+        <label><input type="radio" name="q2" value="0">Motor ON</label>
+        <label><input type="radio" name="q2" value="0">Show Number on Dot Matrix</label>
+        <label><input type="radio" name="q2" value="0">Repeat</label>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">3. Which device displays letters or numbers in Kidsbits?</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="1">Dot Matrix</label>
+        <label><input type="radio" name="q3" value="0">Motor</label>
+        <label><input type="radio" name="q3" value="0">LED</label>
+        <label><input type="radio" name="q3" value="0">Fan</label>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question">4. Which device rotates when using the motor block?</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="1">Motor Fan</label>
+        <label><input type="radio" name="q4" value="0">LED</label>
+        <label><input type="radio" name="q4" value="0">Dot Matrix</label>
+        <label><input type="radio" name="q4" value="0">Buzzer</label>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question">5. Which block repeats actions in KidsBlock?</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="1">Repeat / Loop</label>
+        <label><input type="radio" name="q5" value="0">Wait</label>
+        <label><input type="radio" name="q5" value="0">LED ON</label>
+        <label><input type="radio" name="q5" value="0">Show Number</label>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question">6. What block can pause actions for a short time?</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="1">Wait / Delay</label>
+        <label><input type="radio" name="q6" value="0">Motor Speed</label>
+        <label><input type="radio" name="q6" value="0">LED ON</label>
+        <label><input type="radio" name="q6" value="0">Show Number</label>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question">7. Which component in Kidsbits produces motion?</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="1">Motor / Motor Fan</label>
+        <label><input type="radio" name="q7" value="0">LED</label>
+        <label><input type="radio" name="q7" value="0">Dot Matrix</label>
+        <label><input type="radio" name="q7" value="0">Button</label>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question">8. How do you make an LED blink?</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="1">LED ON → Wait → LED OFF → Wait → Repeat</label>
+        <label><input type="radio" name="q8" value="0">Motor ON → Wait → Motor OFF</label>
+        <label><input type="radio" name="q8" value="0">Show Number → Wait</label>
+        <label><input type="radio" name="q8" value="0">LED ON → Motor ON</label>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question">9. Which block shows numbers or letters on the dot matrix?</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="1">Show Number / Show Text</label>
+        <label><input type="radio" name="q9" value="0">LED ON</label>
+        <label><input type="radio" name="q9" value="0">Motor ON</label>
+        <label><input type="radio" name="q9" value="0">Wait</label>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question">10. What do you call the set of instructions that control Kidsbits?</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="1">Program / Code (block-based)</label>
+        <label><input type="radio" name="q10" value="0">Motor</label>
+        <label><input type="radio" name="q10" value="0">LED</label>
+        <label><input type="radio" name="q10" value="0">Dot Matrix</label>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="question">11. Which block can make the motor spin faster or slower?</div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="1">Set Motor Speed</label>
+        <label><input type="radio" name="q11" value="0">LED ON</label>
+        <label><input type="radio" name="q11" value="0">Show Number</label>
+        <label><input type="radio" name="q11" value="0">Wait</label>
+      </div>
+
+      <!-- Question 12 -->
+      <div class="question">12. Which block turns off the motor fan?</div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="1">Set Motor Speed to 0</label>
+        <label><input type="radio" name="q12" value="0">LED OFF</label>
+        <label><input type="radio" name="q12" value="0">Show Number</label>
+        <label><input type="radio" name="q12" value="0">Wait</label>
+      </div>
+
+      <!-- Question 13 -->
+      <div class="question">13. What is repeated when you use a Repeat / Loop block?</div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="1">The actions inside the block</label>
+        <label><input type="radio" name="q13" value="0">Motor speed only</label>
+        <label><input type="radio" name="q13" value="0">LED ON only</label>
+        <label><input type="radio" name="q13" value="0">Wait only</label>
+      </div>
+
+      <!-- Question 14 -->
+      <div class="question">14. What is needed for an LED to blink continuously?</div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="1">LED ON → Wait → LED OFF → Wait → Repeat</label>
+        <label><input type="radio" name="q14" value="0">Motor ON → Wait → Motor OFF</label>
+        <label><input type="radio" name="q14" value="0">Show Number → Wait</label>
+        <label><input type="radio" name="q14" value="0">Wait only</label>
+      </div>
+
+      <!-- Question 15 -->
+      <div class="question">15. Which device do you control to display a happy face on dot matrix?</div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="1">Dot Matrix</label>
+        <label><input type="radio" name="q15" value="0">Motor Fan</label>
+        <label><input type="radio" name="q15" value="0">LED</label>
+        <label><input type="radio" name="q15" value="0">Button</label>
+      </div>
+
+      <button type="button" onclick="calculateScore()">Submit Quiz</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxfjaDMYykDNG6MN9tgY3P3xvBvtfq2Ejl4L4LqJUqlzNHfgsge-6yIJJfeofJQu6Gr/exec";
+
+    function calculateScore() {
+      let score = 0;
+      for (let i = 1; i <= 15; i++) {
+        let q = document.querySelector('input[name="q' + i + '"]:checked');
+        if (q) score += parseInt(q.value);
+      }
+
+      const name = document.getElementById('studentName').value || "Anonymous";
+      const resultDiv = document.getElementById('result');
+
+      let message = `🎉 Your Score is: ${score}/15 🎉\n`;
+
+      if (score >= 13) {
+        message += "Excellent! 🌸 You are a Kidsbits Superstar!";
+        for (let i = 0; i < 15; i++) {
+          let flower = document.createElement('div');
+          flower.className = 'flower';
+          flower.style.left = (Math.random() * 90) + "%";
+          flower.style.fontSize = (20 + Math.random() * 20) + "px";
+          flower.style.animationDuration = (1 + Math.random()) + "s";
+          flower.textContent = "🌸";
+          document.body.appendChild(flower);
+          setTimeout(() => flower.remove(), 1500);
+        }
+      } else if (score >= 10) {
+        message += "Great job! 👍 You’re getting really good at Kidsbits!";
+      } else {
+        message += "Keep trying! 💪 Practice makes perfect!";
+      }
+
+      resultDiv.textContent = message;
+
+      // Send to Google Sheet
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        body: JSON.stringify({name: name, score: score}),
+        headers: {"Content-Type": "application/json"}
+      }).then(response => response.json())
+        .then(data => console.log("Data saved:", data))
+        .catch(err => console.error("Error sending data:", err));
+    }
+  </script>
+</body>
+</html>
