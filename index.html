@@ -248,44 +248,61 @@
   </form>
   <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-  <script>
-    function calculateScore() {
-      let score = 0;
-      for (let i = 1; i <= 15; i++) {
-        let q = document.querySelector('input[name="q' + i + '"]:checked');
-        if (q) score += parseInt(q.value);
-      }
+ <script>
+  let alreadySubmitted = false; // prevents multiple submissions
 
-      const name = document.getElementById('studentName').value || "Anonymous";
-      const resultDiv = document.getElementById('result');
+  function calculateScore() {
 
-      let message = `🎉 Your Score is: ${score}/15 🎉\n`;
-
-      if (score >= 13) {
-        message += "Excellent! 🌸 You are a Kidsbits Superstar!";
-        for (let i = 0; i < 15; i++) {
-          let flower = document.createElement('div');
-          flower.className = 'flower';
-          flower.style.left = (Math.random() * 90) + "%";
-          flower.style.fontSize = (20 + Math.random() * 20) + "px";
-          flower.style.animationDuration = (1 + Math.random()) + "s";
-          flower.textContent = "🌸";
-          document.body.appendChild(flower);
-          setTimeout(() => flower.remove(), 1500);
-        }
-      } else if (score >= 10) {
-        message += "Great job! 👍 You’re getting really good at Kidsbits!";
-      } else {
-        message += "Keep trying! 💪 Practice makes perfect!";
-      }
-
-      resultDiv.textContent = message;
-
-      // Submit via hidden form to avoid CORS
-      document.getElementById('hiddenName').value = name;
-      document.getElementById('hiddenScore').value = score;
-      document.getElementById('hiddenForm').submit();
+    // If already submitted, stop immediately
+    if (alreadySubmitted) {
+      alert("You have already submitted the quiz.");
+      return;
     }
-  </script>
+
+    let score = 0;
+    for (let i = 1; i <= 15; i++) {
+      let q = document.querySelector('input[name="q' + i + '"]:checked');
+      if (q) score += parseInt(q.value);
+    }
+
+    const nameInput = document.getElementById('studentName');
+    const name = nameInput.value.trim();
+
+    if (name === "") {
+      alert("Please enter your full name before submitting.");
+      return;
+    }
+
+    const resultDiv = document.getElementById('result');
+    const submitBtn = document.querySelector("button");
+
+    let message = `🎉 Your Score is: ${score}/15 🎉\n`;
+
+    if (score >= 13) {
+      message += "Excellent! 🌸 You are a Kidsbits Superstar!";
+    } else if (score >= 10) {
+      message += "Great job! 👍 You’re getting really good at Kidsbits!";
+    } else {
+      message += "Keep trying! 💪 Practice makes perfect!";
+    }
+
+    resultDiv.textContent = message;
+
+    // Send to Google Sheet
+    document.getElementById('hiddenName').value = name;
+    document.getElementById('hiddenScore').value = score;
+    document.getElementById('hiddenForm').submit();
+
+    // 🔒 LOCK THE QUIZ
+    alreadySubmitted = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Quiz Submitted ✅";
+
+    // Disable all inputs
+    document.querySelectorAll("input").forEach(input => {
+      input.disabled = true;
+    });
+  }
+</script>
 </body>
 </html>
