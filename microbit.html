@@ -244,88 +244,78 @@
   </form>
   <iframe name="hidden_iframe" style="display:none;"></iframe>
 
- <script>
-let alreadySubmitted = false; // prevents multiple submissions
+  <script>
+    let alreadySubmitted = false;
 
-function calculateScore() {
-  if (alreadySubmitted) {
-    alert("You have already submitted the quiz.");
-    return;
-  }
-
-  const totalQuestions = 15;
-  let score = 0;
-
-  for (let i = 1; i <= totalQuestions; i++) {
-    const qChecked = document.querySelector('input[name="q' + i + '"]:checked');
-    const questionDiv = document.querySelector('input[name="q' + i + '"]').closest('.question').parentElement;
-
-    // Remove previous icons if any
-    questionDiv.querySelectorAll('.icon').forEach(icon => icon.remove());
-
-    if (qChecked) {
-      if (parseInt(qChecked.value) === 1) {
-        score += 1;
-        const tick = document.createElement('span');
-        tick.className = 'icon';
-        tick.textContent = ' ✅';
-        qChecked.parentElement.appendChild(tick);
-      } else {
-        const cross = document.createElement('span');
-        cross.className = 'icon';
-        cross.textContent = ' ❌';
-        qChecked.parentElement.appendChild(cross);
+    function calculateScore() {
+      if (alreadySubmitted) {
+        alert("You have already submitted the quiz.");
+        return;
       }
-    } else {
-      // If no answer selected, mark as wrong
-      const cross = document.createElement('span');
-      cross.className = 'icon';
-      cross.textContent = ' ❌';
-      questionDiv.querySelector('.options').appendChild(cross);
+
+      const nameInput = document.getElementById('studentName');
+      const name = nameInput.value.trim();
+      if (name === "") {
+        alert("Please enter your full name before submitting.");
+        return;
+      }
+
+      let score = 0;
+
+      for (let i = 1; i <= 15; i++) {
+        let options = document.querySelectorAll(`input[name="q${i}"]`);
+        options.forEach(opt => {
+          const label = opt.parentElement;
+          label.querySelectorAll(".icon").forEach(e => e.remove()); // Remove old icons
+          const span = document.createElement("span");
+          span.className = "icon";
+          span.style.position = "absolute";
+          span.style.right = "10px";
+          span.style.fontSize = "18px";
+
+          if (parseInt(opt.value) === 1) {
+            // Correct answer
+            span.textContent = "✅";
+          } else if (opt.checked && parseInt(opt.value) === 0) {
+            // Wrong answer selected
+            span.textContent = "❌";
+          }
+          label.appendChild(span);
+
+          if (opt.checked) {
+            score += parseInt(opt.value);
+          }
+        });
+      }
+
+      const resultDiv = document.getElementById('result');
+      let message = `🎉 Your Score is: ${score}/15 🎉\n`;
+      if (score >= 13) {
+        message += "Excellent! 🌸 You are a Micro:bit Superstar!";
+      } else if (score >= 10) {
+        message += "Great job! 👍 Keep going!";
+      } else {
+        message += "Keep practicing! 💪";
+      }
+      resultDiv.textContent = message;
+
+      // Send to Google Sheet
+      document.getElementById('hiddenName').value = name;
+      document.getElementById('hiddenScore').value = score;
+      document.getElementById('hiddenForm').submit();
+
+      // Disable quiz after submission
+      alreadySubmitted = true;
+      document.querySelector("button").disabled = true;
+      document.querySelector("button").textContent = "Quiz Submitted ✅";
+      document.querySelectorAll("input").forEach(input => input.disabled = true);
     }
-  }
-
-  const nameInput = document.getElementById('studentName');
-  const name = nameInput.value.trim();
-
-  if (name === "") {
-    alert("Please enter your full name before submitting.");
-    return;
-  }
-
-  const resultDiv = document.getElementById('result');
-  const submitBtn = document.querySelector("button");
-
-  let message = `🎉 Your Score is: ${score}/${totalQuestions} 🎉\n`;
-
-  if (score >= 13) {
-    message += "Excellent! 🌸 You are a Kidsbits Superstar!";
-  } else if (score >= 10) {
-    message += "Great job! 👍 You’re getting really good at Kidsbits!";
-  } else {
-    message += "Keep trying! 💪 Practice makes perfect!";
-  }
-
-  resultDiv.textContent = message;
-
-  // Send to Google Sheet
-  document.getElementById('hiddenName').value = name;
-  document.getElementById('hiddenScore').value = score;
-  document.getElementById('hiddenForm').submit();
-
-  // 🔒 LOCK THE QUIZ
-  alreadySubmitted = true;
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Quiz Submitted ✅";
-
-  // Disable all inputs
-  document.querySelectorAll("input").forEach(input => {
-    input.disabled = true;
-  });
-}
-</script>
+  </script>
+</body>
+</html>
 
 </body>
 
 </html>
+
 
