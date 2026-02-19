@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kidsbits Coding Box Quiz</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #a0eaff, #fef0ff);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 720px;
+      margin: 30px auto;
+      background: #fff7f3;
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      border: 3px solid #ff99cc;
+    }
+    h1 {
+      text-align: center;
+      color: #ff3399;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .options label {
+      display: block;
+      padding: 8px 12px;
+      border: 2px solid #ff66cc;
+      border-radius: 10px;
+      margin: 6px 0;
+      cursor: pointer;
+      transition: 0.2s;
+      background-color: #ffe6f0;
+    }
+    .options input {
+      margin-right: 10px;
+    }
+    .options label:hover {
+      background-color: #ffd6eb;
+    }
+    button {
+      display: block;
+      width: 100%;
+      background-color: #ff3399;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #cc297a;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      color: #33cc33;
+      position: relative;
+      white-space: pre-line;
+    }
+    .flower {
+      position: absolute;
+      font-size: 24px;
+      animation: popUp 1.5s ease-out forwards;
+    }
+    @keyframes popUp {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; }
+      50% { transform: translateY(-100px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1); opacity: 0; }
+    }
+    #studentName {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ff66cc;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Kidsbits Coding Box Quiz</h1>
+
+    <div class="question">Enter your full name:</div>
+    <input type="text" id="studentName" placeholder="Full Name">
+
+    <form id="quizForm">
+      <!-- Question 1 -->
+      <div class="question">1. Which block runs code when the micro:bit is shaken?</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="0">forever</label>
+        <label><input type="radio" name="q1" value="0">on button A pressed</label>
+        <label><input type="radio" name="q1" value="1">on shake</label>
+        <label><input type="radio" name="q1" value="0">on logo pressed</label>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">2.What does the on button B pressed block do?</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="1">Runs the code inside it when button B is pressed</label>
+        <label><input type="radio" name="q2" value="0">Plays a melody automatically</label>
+        <label><input type="radio" name="q2" value="0">Shakes the micro:bit</label>
+        <label><input type="radio" name="q2" value="0">Turns off the micro:bit</label>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">3. Which block triggers an action when you touch the micro:bit logo?</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="1">on logo pressed</label>
+        <label><input type="radio" name="q3" value="0">on button A pressed</label>
+        <label><input type="radio" name="q3" value="0">on shake</label>
+        <label><input type="radio" name="q3" value="0">on button B pressed</label>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question">4.To play a tune when button A is pressed, which blocks are needed?</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="1">on button A pressed + play melody</label>
+        <label><input type="radio" name="q4" value="0">on shake + show leds</label>
+        <label><input type="radio" name="q4" value="0">forever + play melody</label>
+        <label><input type="radio" name="q4" value="0">on logo pressed + pause</label>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question">5. Which block is used to make the micro:bit play a song or tune?</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="0">show leds</label>
+        <label><input type="radio" name="q5" value="1">play melody</label>
+        <label><input type="radio" name="q5" value="0">on shake</label>
+        <label><input type="radio" name="q5" value="0">pause</label>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question">6.What happens if you place play melody inside on shake?</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="0">Nothing happens</label>
+        <label><input type="radio" name="q6" value="0">Melody plays automatically forever</label>
+        <label><input type="radio" name="q6" value="1">Melody plays when micro:bit is shaken</label>
+        <label><input type="radio" name="q6" value="0">Micro:bit starts shaking</label>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question">7.Which block detects pressing both buttons A and B together?</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="0">on shake</label>
+        <label><input type="radio" name="q7" value="0">on button B pressed</label>
+        <label><input type="radio" name="q7" value="0">on logo pressed</label>
+        <label><input type="radio" name="q7" value="1">on button A+B pressed</label>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question">8. You want “Happy Birthday” to play when the logo is pressed. Which blocks do you combine?</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="1">on logo pressed + play melody</label>
+        <label><input type="radio" name="q8" value="0">forever + play melody</label>
+        <label><input type="radio" name="q8" value="0">Show Number → Wait</label>
+        <label><input type="radio" name="q8" value="0">on shake + show leds</label>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question">9. Which input block is NOT suitable to play music when micro:bit is picked up?</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="0">on shake</label>
+        <label><input type="radio" name="q9" value="0">on start</label>
+        <label><input type="radio" name="q9" value="1">on button pressed</label>
+        <label><input type="radio" name="q9" value="0">on logo pressed</label>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question">10.True or False: The on start block runs only once when the micro:bit is turned on.</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="1">True</label>
+        <label><input type="radio" name="q10" value="0">False</label>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="question">11.If you put play melody in a forever loop, what happens?</div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="1">The melody plays continuously</label>
+        <label><input type="radio" name="q11" value="0">The melody plays only once</label>
+        <label><input type="radio" name="q11" value="0">The micro:bit crashes</label>
+        <label><input type="radio" name="q11" value="0">The melody is paused</label>
+      </div>
+
+      <!-- Question 12 -->
+      <div class="question">12.Which block would you use to make the micro:bit play a sound when you shake it?</div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="1">on shake + play melody</label>
+        <label><input type="radio" name="q12" value="0">on button pressed + play melody</label>
+        <label><input type="radio" name="q12" value="0">on logo pressed + play melody</label>
+        <label><input type="radio" name="q12" value="0">on start + play melody</label>
+      </div>
+
+      <!-- Question 13 -->
+      <div class="question">13.. What does on button A+B pressed mean?</div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="0">Press button A AND B to run code</label>
+        <label><input type="radio" name="q13" value="1">Press both buttons at the same time to run code</label>
+        <label><input type="radio" name="q13" value="0">Press A then B in order</label>
+        <label><input type="radio" name="q13" value="0">It runs code automatically</label>
+      </div>
+
+      <!-- Question 14 -->
+      <div class="question">14.True or False: You can combine music and input blocks so that different actions happen for different inputs.</div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="1">True</label>
+        <label><input type="radio" name="q14" value="0">False</label>
+      </div>
+
+      <!-- Question 15 -->
+      <div class="question">15.Which block will run code automatically when the micro:bit is powered on?</div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="1">On shake</label>
+        <label><input type="radio" name="q15" value="0">On Start</label>
+        <label><input type="radio" name="q15" value="0">On Logo Pressed</label>
+        <label><input type="radio" name="q15" value="0">On button B pressed</label>
+      </div>
+
+      <button type="button" onclick="calculateScore()">Submit Quiz</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <!-- Hidden form for Google Apps Script submission -->
+  <form id="hiddenForm" action="https://script.google.com/macros/s/AKfycbwMEcYuvvyULNGLLW2DcOk5rws9DyIc8fh8x9QBUQS6PkFglpfSbla6JIB23kLtNr6x/exec" method="post" target="hidden_iframe">
+    <input type="hidden" name="name" id="hiddenName">
+    <input type="hidden" name="score" id="hiddenScore">
+  </form>
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+ <script>
+  let alreadySubmitted = false; // prevents multiple submissions
+
+  function calculateScore() {
+
+    // If already submitted, stop immediately
+    if (alreadySubmitted) {
+      alert("You have already submitted the quiz.");
+      return;
+    }
+
+    let score = 0;
+    for (let i = 1; i <= 15; i++) {
+      let q = document.querySelector('input[name="q' + i + '"]:checked');
+      if (q) score += parseInt(q.value);
+    }
+
+    const nameInput = document.getElementById('studentName');
+    const name = nameInput.value.trim();
+
+    if (name === "") {
+      alert("Please enter your full name before submitting.");
+      return;
+    }
+
+    const resultDiv = document.getElementById('result');
+    const submitBtn = document.querySelector("button");
+
+    let message = `🎉 Your Score is: ${score}/15 🎉\n`;
+
+    if (score >= 13) {
+      message += "Excellent! 🌸 You are a Kidsbits Superstar!";
+    } else if (score >= 10) {
+      message += "Great job! 👍 You’re getting really good at Kidsbits!";
+    } else {
+      message += "Keep trying! 💪 Practice makes perfect!";
+    }
+
+    resultDiv.textContent = message;
+
+    // Send to Google Sheet
+    document.getElementById('hiddenName').value = name;
+    document.getElementById('hiddenScore').value = score;
+    document.getElementById('hiddenForm').submit();
+
+    // 🔒 LOCK THE QUIZ
+    alreadySubmitted = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Quiz Submitted ✅";
+
+    // Disable all inputs
+    document.querySelectorAll("input").forEach(input => {
+      input.disabled = true;
+    });
+  }
+</script>
+</body>
+</html>
