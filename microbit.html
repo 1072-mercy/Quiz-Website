@@ -245,61 +245,87 @@
   <iframe name="hidden_iframe" style="display:none;"></iframe>
 
  <script>
-  let alreadySubmitted = false; // prevents multiple submissions
+let alreadySubmitted = false; // prevents multiple submissions
 
-  function calculateScore() {
-
-    // If already submitted, stop immediately
-    if (alreadySubmitted) {
-      alert("You have already submitted the quiz.");
-      return;
-    }
-
-    let score = 0;
-    for (let i = 1; i <= 15; i++) {
-      let q = document.querySelector('input[name="q' + i + '"]:checked');
-      if (q) score += parseInt(q.value);
-    }
-
-    const nameInput = document.getElementById('studentName');
-    const name = nameInput.value.trim();
-
-    if (name === "") {
-      alert("Please enter your full name before submitting.");
-      return;
-    }
-
-    const resultDiv = document.getElementById('result');
-    const submitBtn = document.querySelector("button");
-
-    let message = `🎉 Your Score is: ${score}/15 🎉\n`;
-
-    if (score >= 13) {
-      message += "Excellent! 🌸 You are a Kidsbits Superstar!";
-    } else if (score >= 10) {
-      message += "Great job! 👍 You’re getting really good at Kidsbits!";
-    } else {
-      message += "Keep trying! 💪 Practice makes perfect!";
-    }
-
-    resultDiv.textContent = message;
-
-    // Send to Google Sheet
-    document.getElementById('hiddenName').value = name;
-    document.getElementById('hiddenScore').value = score;
-    document.getElementById('hiddenForm').submit();
-
-    // 🔒 LOCK THE QUIZ
-    alreadySubmitted = true;
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Quiz Submitted ✅";
-
-    // Disable all inputs
-    document.querySelectorAll("input").forEach(input => {
-      input.disabled = true;
-    });
+function calculateScore() {
+  if (alreadySubmitted) {
+    alert("You have already submitted the quiz.");
+    return;
   }
+
+  const totalQuestions = 15;
+  let score = 0;
+
+  for (let i = 1; i <= totalQuestions; i++) {
+    const qChecked = document.querySelector('input[name="q' + i + '"]:checked');
+    const questionDiv = document.querySelector('input[name="q' + i + '"]').closest('.question').parentElement;
+
+    // Remove previous icons if any
+    questionDiv.querySelectorAll('.icon').forEach(icon => icon.remove());
+
+    if (qChecked) {
+      if (parseInt(qChecked.value) === 1) {
+        score += 1;
+        const tick = document.createElement('span');
+        tick.className = 'icon';
+        tick.textContent = ' ✅';
+        qChecked.parentElement.appendChild(tick);
+      } else {
+        const cross = document.createElement('span');
+        cross.className = 'icon';
+        cross.textContent = ' ❌';
+        qChecked.parentElement.appendChild(cross);
+      }
+    } else {
+      // If no answer selected, mark as wrong
+      const cross = document.createElement('span');
+      cross.className = 'icon';
+      cross.textContent = ' ❌';
+      questionDiv.querySelector('.options').appendChild(cross);
+    }
+  }
+
+  const nameInput = document.getElementById('studentName');
+  const name = nameInput.value.trim();
+
+  if (name === "") {
+    alert("Please enter your full name before submitting.");
+    return;
+  }
+
+  const resultDiv = document.getElementById('result');
+  const submitBtn = document.querySelector("button");
+
+  let message = `🎉 Your Score is: ${score}/${totalQuestions} 🎉\n`;
+
+  if (score >= 13) {
+    message += "Excellent! 🌸 You are a Kidsbits Superstar!";
+  } else if (score >= 10) {
+    message += "Great job! 👍 You’re getting really good at Kidsbits!";
+  } else {
+    message += "Keep trying! 💪 Practice makes perfect!";
+  }
+
+  resultDiv.textContent = message;
+
+  // Send to Google Sheet
+  document.getElementById('hiddenName').value = name;
+  document.getElementById('hiddenScore').value = score;
+  document.getElementById('hiddenForm').submit();
+
+  // 🔒 LOCK THE QUIZ
+  alreadySubmitted = true;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Quiz Submitted ✅";
+
+  // Disable all inputs
+  document.querySelectorAll("input").forEach(input => {
+    input.disabled = true;
+  });
+}
 </script>
+
 </body>
 
 </html>
+
